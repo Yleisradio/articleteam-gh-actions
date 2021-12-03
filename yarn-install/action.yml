@@ -39,18 +39,21 @@ runs:
         path: '**/node_modules'
         key: ${{ runner.os }}-node-${{ hashFiles('yarn.lock') }}-${{ inputs.dependencies }}
 
-    - name: Install packages with Yarn 1
-      if: steps.yarn-version.outputs.version == "1"
+    - name: Install packages with Yarn
       shell: bash
       run: |
         if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
           echo INFO: node_modules CACHE HIT:
           exit 0
         fi
-
+        
         echo INFO: node_modules CACHE MISS: Install dependencies now
-        if [ ${{ inputs.dependencies }} == "production" ]; then
-          yarn --frozen-lockfile --ignore-scripts --production
+        if [ "${{ steps.yarn-version.outputs.version }}" == "1" ]; then
+          if [ ${{ inputs.dependencies }} == "production" ]; then
+            yarn --frozen-lockfile --ignore-scripts --production
+          else
+            yarn --frozen-lockfile --ignore-scripts
+          fi
         else
-          yarn --frozen-lockfile --ignore-scripts
+          yarn --immutable
         fi
