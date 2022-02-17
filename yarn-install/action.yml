@@ -5,6 +5,9 @@ inputs:
     description: '"production" or "all"'
     required: false
     default: 'all'
+  npm-auth-token:
+    description: 'Token to access NPM repos'
+    required: false
 runs:
   using: 'composite'
   steps:
@@ -37,10 +40,17 @@ runs:
       id: cache
       with:
         path: '**/node_modules'
-        key: ${{ runner.os }}-node-${{ hashFiles('yarn.lock') }}-${{ inputs.dependencies }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}-${{ inputs.dependencies }}
+
+    - name: Set npm registry auth token
+      shell: bash
+      if: inputs.npm-auth-token
+      run: yarn config set npmScopes.yleisradio.npmAuthToken ${{ inputs.npm-auth-token }}
 
     - name: Install packages with Yarn
       shell: bash
+      env:
+        YARN_ENABLE_SCRIPTS: '0'
       run: |
         if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
           echo INFO: node_modules CACHE HIT:
