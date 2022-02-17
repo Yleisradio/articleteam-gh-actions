@@ -65,5 +65,10 @@ runs:
             yarn --frozen-lockfile --ignore-scripts
           fi
         else
-          yarn --immutable
+          if [ ${{ inputs.dependencies }} == "production" ]; then
+            yarn plugin import workspace-tools
+            yarn workspaces focus -A --production
+          else
+            yarn --immutable
+          fi
         fi
