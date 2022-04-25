@@ -1,0 +1,18 @@
+name: Sync common labels (manually)
+description: 'Common build setup for yarn projects'
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+runs:
+  using: 'composite'
+  on: ubuntu-latest
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Synchronize labels
+      uses: julb/action-manage-label@v1
+      with:
+        from: https://raw.githubusercontent.com/Yleisradio/articleteam-gh-actions/repo-label-sync-action/label-sync/labels.yml
+        skip_delete: true
