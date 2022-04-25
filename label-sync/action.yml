@@ -11,5 +11,5 @@ runs:
     - name: Synchronize labels
       uses: julb/action-manage-label@v1
       with:
-        from: https://raw.githubusercontent.com/Yleisradio/articleteam-gh-actions/repo-label-sync-action/label-sync/labels.yml
+        from: https://raw.githubusercontent.com/Yleisradio/articleteam-gh-actions/main/label-sync/labels.yml
         skip_delete: true
