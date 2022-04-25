@@ -1,4 +1,4 @@
-# https://github.com/marketplace/actions/github-labeler
+# @see https://github.com/Yleisradio/articleteam-gh-actions#using-label-sync-action
 name: Sync common labels (manually)
 
 on: workflow_dispatch
