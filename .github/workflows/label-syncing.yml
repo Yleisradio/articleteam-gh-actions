@@ -13,3 +13,5 @@ jobs:
       -
         name: Run Labeler
         uses: Yleisradio/articleteam-gh-actions/label-sync@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

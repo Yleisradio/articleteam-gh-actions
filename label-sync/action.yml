@@ -13,5 +13,3 @@ runs:
       with:
         from: https://raw.githubusercontent.com/Yleisradio/articleteam-gh-actions/repo-label-sync-action/label-sync/labels.yml
         skip_delete: true
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
