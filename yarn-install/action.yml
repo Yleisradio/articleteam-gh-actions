@@ -35,7 +35,7 @@ runs:
       shell: bash
       run: echo "::set-output name=version::$(yarn --version | cut -d . -f 1)"
 
-    - name: Set Yarn cache
+    - name: "Set Yarn cache with dependencies: '${{ inputs.dependencies }}'"
       uses: actions/cache@v2
       id: cache
       with:
@@ -53,19 +53,19 @@ runs:
         YARN_ENABLE_SCRIPTS: '0'
       run: |
         if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
-          echo INFO: node_modules CACHE HIT:
+          echo "INFO: node_modules CACHE HIT"
           exit 0
         fi
-        
-        echo INFO: node_modules CACHE MISS: Install dependencies now
+
+        echo "INFO: node_modules CACHE MISS. Caching dependencies now."
         if [ "${{ steps.yarn-version.outputs.version }}" == "1" ]; then
-          if [ ${{ inputs.dependencies }} == "production" ]; then
+          if [ "${{ inputs.dependencies }}" == "production" ]; then
             yarn --frozen-lockfile --ignore-scripts --production
           else
             yarn --frozen-lockfile --ignore-scripts
           fi
         else
-          if [ ${{ inputs.dependencies }} == "production" ]; then
+          if [ "${{ inputs.dependencies }}" == "production" ]; then
             yarn plugin import workspace-tools
             yarn workspaces focus -A --production
           else
