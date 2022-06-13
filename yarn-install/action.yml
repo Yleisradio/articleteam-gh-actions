@@ -8,6 +8,10 @@ inputs:
   npm-auth-token:
     description: 'Token to access NPM repos'
     required: false
+  cache-key:
+    description: 'Custom cache prefix, final key will be $CACHE_KEY-$RUNNER_OS-$HASH_OF_YARN_LOCK-$DEPENDENCIES'
+    required: false
+    default: 'yarn'
 runs:
   using: 'composite'
   steps:
@@ -40,7 +44,7 @@ runs:
       id: cache
       with:
         path: '**/node_modules'
-        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}-${{ inputs.dependencies }}
+        key: ${{ inputs.cache-key }}-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.dependencies }}
 
     - name: Set npm registry auth token
       shell: bash
