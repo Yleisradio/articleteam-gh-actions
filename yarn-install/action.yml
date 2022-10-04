@@ -40,11 +40,11 @@ runs:
       run: echo "::set-output name=version::$(yarn --version | cut -d . -f 1)"
 
     - name: "Set Yarn cache with dependencies: '${{ inputs.dependencies }}'"
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       id: cache
       with:
         path: '**/node_modules'
-        key: ${{ inputs.cache-key }}-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.dependencies }}
+        key: ${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.dependencies }}-${{ hashFiles('yarn.lock') }}
 
     - name: Set npm registry auth token
       shell: bash
