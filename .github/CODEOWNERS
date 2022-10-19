@@ -1,0 +1,5 @@
+# This owner is the default owner for everything in
+# the repo. Unless a later match takes precedence,
+# @Yleisradio/artikkelitiimi team will be requested for
+# review when someone opens a pull request.
+*       @Yleisradio/artikkelitiimi
