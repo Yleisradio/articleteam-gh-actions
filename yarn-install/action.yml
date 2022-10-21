@@ -23,7 +23,7 @@ runs:
       shell: bash
       run: |
         [ ! -f "./.nvmrc" ] && echo "ERROR: File ./.nvmrc not found, exiting..." && exit 1
-        echo "name=nvmrc::$(cat .nvmrc)" >> $GITHUB_OUTPUT
+        echo "nvmrc=$(cat .nvmrc)" >> $GITHUB_OUTPUT
         echo "NVMRC: $(cat .nvmrc)"
 
     - name: Set up node
@@ -37,7 +37,7 @@ runs:
     - name: Get yarn version
       id: yarn-version
       shell: bash
-      run: echo "name=version::$(yarn --version | cut -d . -f 1)" >> $GITHUB_OUTPUT
+      run: echo "version=$(yarn --version | cut -d . -f 1)" >> $GITHUB_OUTPUT
 
     - name: "Set Yarn cache with dependencies: '${{ inputs.dependencies }}'"
       uses: actions/cache@v3
