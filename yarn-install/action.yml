@@ -39,13 +39,6 @@ runs:
       shell: bash
       run: echo "version=$(yarn --version | cut -d . -f 1)" >> $GITHUB_OUTPUT
 
-    - name: "Set Yarn cache with dependencies: '${{ inputs.dependencies }}'"
-      uses: actions/cache@v3
-      id: cache
-      with:
-        path: '**/node_modules'
-        key: ${{ inputs.cache-key }}-${{ runner.os }}-${{ inputs.dependencies }}-${{ hashFiles('yarn.lock') }}
-
     - name: Set npm registry auth token
       shell: bash
       if: inputs.npm-auth-token
