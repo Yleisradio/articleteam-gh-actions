@@ -49,12 +49,6 @@ runs:
       env:
         YARN_ENABLE_SCRIPTS: '0'
       run: |
-        if [ "${{ steps.cache.outputs.cache-hit }}" == "true" ]; then
-          echo "INFO: node_modules CACHE HIT"
-          exit 0
-        fi
-
-        echo "INFO: node_modules CACHE MISS. Caching dependencies now."
         if [ "${{ steps.yarn-version.outputs.version }}" == "1" ]; then
           if [ "${{ inputs.dependencies }}" == "production" ]; then
             yarn --frozen-lockfile --ignore-scripts --production
