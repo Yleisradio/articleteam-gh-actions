@@ -61,3 +61,7 @@
 - name: "good first issue"
   color: "228B22"
   description: "Onboarding or first time committer"
+
+- name: "technical debt"
+  color: "964B00"
+  description: "Dependency updates, refactorings etc."
