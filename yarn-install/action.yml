@@ -34,6 +34,10 @@ runs:
         scope: '@yleisradio'
         cache: yarn
 
+    - name: Enable corepack
+      shell: bash
+      run: corepack enable
+
     - name: Get yarn version
       id: yarn-version
       shell: bash
