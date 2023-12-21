@@ -30,13 +30,18 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ steps.nvmrc.outputs.nvmrc }}
-        registry-url: 'https://npm.pkg.github.com/'
-        scope: '@yleisradio'
-        cache: yarn
 
     - name: Enable corepack
       shell: bash
       run: corepack enable
+
+    - name: Set up yarn
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ steps.nvmrc.outputs.nvmrc }}
+        registry-url: 'https://npm.pkg.github.com/'
+        scope: '@yleisradio'
+        cache: yarn
 
     - name: Get yarn version
       id: yarn-version
