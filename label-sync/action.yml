@@ -6,7 +6,7 @@ runs:
   using: 'composite'
   steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Synchronize labels
       uses: julbme/gh-action-manage-label@v1
