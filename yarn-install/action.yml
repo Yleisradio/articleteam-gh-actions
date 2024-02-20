@@ -27,7 +27,7 @@ runs:
         echo "NVMRC: $(cat .nvmrc)"
 
     - name: Set up node
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ steps.nvmrc.outputs.nvmrc }}
 
@@ -36,7 +36,7 @@ runs:
       run: corepack enable
 
     - name: Set up yarn
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ steps.nvmrc.outputs.nvmrc }}
         registry-url: 'https://npm.pkg.github.com/'
